@@ -1,14 +1,16 @@
 package stream_api_task.models;
 
 public class Product {
-    private int id;
-    private String title;
-    private String description;
-    private int price;
-    private int qty;
+    private final int id;
+    private final String title;
+    private final String description;
+    private final String category;
+    private final int price;
+    private final int qty;
 
-    public Product(int id, String title, String description, int price, int qty) {
+    public Product(int id, String category, String title, String description, int price, int qty) {
         this.id = id;
+        this.category = category;
         this.title = title;
         this.description = description;
         this.price = price;

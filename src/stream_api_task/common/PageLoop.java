@@ -9,7 +9,7 @@ public class PageLoop {
         this.view = view;
     }
 
-    int getchildrenSize() {
+    int getChildrenSize() {
         return view.getChildren().size();
     }
 
@@ -26,7 +26,7 @@ public class PageLoop {
         while (true) {
             view.action();
             display();
-            final int fullSize = getchildrenSize() + getOptionalSize() + 1;
+            final int fullSize = getChildrenSize() + getOptionalSize() + 1;
             Scanner in = new Scanner(System.in);
             int value = in.nextInt();
             if (value < 0 || value > fullSize) {
@@ -34,16 +34,16 @@ public class PageLoop {
             }
             else if (value == fullSize) {
                 break;
-            } else if (value < getchildrenSize()) {
+            } else if (value <= getChildrenSize()) {
                 AppView selectedView = view.getChildren().get(value - 1);
                 new PageLoop(selectedView).run();
             } else {
-                if (value == getchildrenSize() && view.hasNextPage) {
+                if (value - 1 == getChildrenSize() && view.hasNextPage) {
                     view.nowPage++;
                     new PageLoop(view).run();
                 } else {
                     view.nowPage = 0;
-                    int comparatorIndex = value - getchildrenSize() - 1 - (view.hasNextPage ? 1 : 0);
+                    int comparatorIndex = value - getChildrenSize() - 1 - (view.hasNextPage ? 1 : 0);
                     view.selectedComparator = view.availableComparators.get(comparatorIndex);
                     new PageLoop(view).run();
                 }
@@ -54,8 +54,8 @@ public class PageLoop {
     public void display() {
         int currentIndex = 1;
         System.out.println(view.getTitle());
-        System.out.println("Выберите пункт меню (1 - " + (getchildrenSize() + 1) + ")");
-        for (int i = 0; i < getchildrenSize(); i++) {
+        System.out.println("Выберите пункт меню (1 - " + (getChildrenSize() + 1) + ")");
+        for (int i = 0; i < getChildrenSize(); i++) {
             AppView appView = view.getChildren().get(i);
             System.out.println(currentIndex + " - " + appView.getTitle());
             currentIndex++;

@@ -8,21 +8,25 @@ import java.util.stream.Collectors;
 
 public class CatalogDataSource {
 
+    ArrayList<Product> catalog = getCatalog();
+
     public ArrayList<Product> getCatalog() {
         ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product(1, "SmartPhone", "Best phone", 1000, 5));
-        products.add(new Product(2, "Laptop", "Some laptop", 2000, 10));
-        products.add(new Product(3, "Watch", "Best watch", 500, 8));
-        products.add(new Product(4, "Phone", "Simple phone", 100, 5));
+        products.add(new Product(1, "phone", "SmartPhone", "Best phone", 1000, 5));
+        products.add(new Product(2, "laptop", "Laptop", "Some laptop", 2000, 10));
+        products.add(new Product(3, "watch", "Watch", "Best watch", 500, 8));
+        products.add(new Product(4, "phone", "Phone", "Simple phone", 100, 5));
         for (int i = 0; i < 20; i++) {
-            products.add(new Product(i + 5, "Phone" + i, "Simple phone", 100 + i * 100, 5 + i / 2));
+            products.add(new Product(i + 5, "phone", "Phone" + i, "Simple phone", 100 + i * 100, 5 + i / 2));
+            products.add(new Product(i + 25, "laptop", "Laptop", "Some laptop", 2000 + i * 10, i));
+            products.add(new Product(i + 45, "watch", "Watch", "Some watch", 200 + i * 10, i));
         }
         return products;
     }
 
     public ArrayList<Product> getCatalogPage(int page, int limit, Comparator<Product> comparator) {
-        ArrayList<Product> products = getCatalog();
-        products = products.stream()
+        ArrayList<Product> products;
+        products = catalog.stream()
                 .filter(p -> p.getQty() > 0)
                 .sorted(comparator)
                 .skip((long) page * limit)
@@ -36,8 +40,7 @@ public class CatalogDataSource {
     }
 
     public Product getById(int id) {
-        ArrayList<Product> products = getCatalog();
-        for (Product product : products) {
+        for (Product product : catalog) {
             if (product.getId() == id) {
                 return product;
             }
