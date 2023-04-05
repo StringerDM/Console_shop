@@ -4,6 +4,7 @@ import stream_api_task.comparators.AppComparator;
 import stream_api_task.comparators.PriceComparator;
 import stream_api_task.common.AppView;
 import stream_api_task.common.Paginable;
+import stream_api_task.models.Category;
 import stream_api_task.models.Product;
 import stream_api_task.service.ShopService;
 
@@ -13,8 +14,9 @@ public class CatalogView extends AppView implements Paginable {
     final ShopService service;
     public String format = "%-4s%-14s%-2s\n";
 
-    public CatalogView(ArrayList<AppView> children, ShopService service, ArrayList<AppComparator<Product>> comparators) {
-        super("Каталог", children);
+    public CatalogView(Category category, ArrayList<AppView> children, ShopService service, ArrayList<AppComparator<Product>> comparators) {
+        super("Каталог " + category, children);
+        super.category = category;
         this.service = service;
         availableComparators.addAll(comparators);
         if (!availableComparators.isEmpty()) {
@@ -26,7 +28,7 @@ public class CatalogView extends AppView implements Paginable {
     public void action() {
         PriceComparator comparator = new PriceComparator();
         comparator.isAsc = false;
-        ArrayList<Product> catalog =  service.getCatalogPage(nowPage, pageLimit, selectedComparator.comparator);
+        ArrayList<Product> catalog =  service.getCatalogPage(nowPage, pageLimit, selectedComparator.comparator, category);
 
         hasNextPage = (catalog.size() == pageLimit);
 

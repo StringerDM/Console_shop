@@ -4,11 +4,11 @@ public class Product {
     private final int id;
     private final String title;
     private final String description;
-    private final String category;
+    private final Category category;
     private final int price;
     private final int qty;
 
-    public Product(int id, String category, String title, String description, int price, int qty) {
+    public Product(int id, Category category, String title, String description, int price, int qty) {
         this.id = id;
         this.category = category;
         this.title = title;
@@ -31,6 +31,10 @@ public class Product {
 
     public int getQty() {
         return qty;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
 

@@ -4,6 +4,7 @@ import stream_api_task.data_source.CartDataSource;
 import stream_api_task.data_source.CatalogDataSource;
 import stream_api_task.data_source.OrderDataSource;
 import stream_api_task.models.CartItem;
+import stream_api_task.models.Category;
 import stream_api_task.models.Order;
 import stream_api_task.models.Product;
 
@@ -25,8 +26,8 @@ public class ShopService {
         return catalogDataSource.getCatalog();
     }
 
-    public ArrayList<Product> getCatalogPage(int page, int limit, Comparator<Product> comparator) {
-        return catalogDataSource.getCatalogPage(page, limit, comparator);
+    public ArrayList<Product> getCatalogPage(int page, int limit, Comparator<Product> comparator, Category category) {
+        return catalogDataSource.getCatalogPage(page, limit, comparator, category);
     }
 
     public ArrayList<Product> getCatalogPage(int page, int limit) {

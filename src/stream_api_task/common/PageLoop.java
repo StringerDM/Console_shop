@@ -54,7 +54,7 @@ public class PageLoop {
     public void display() {
         int currentIndex = 1;
         System.out.println(view.getTitle());
-        System.out.println("Выберите пункт меню (1 - " + (getChildrenSize() + 1) + ")");
+        System.out.println("Выберите пункт меню (1 - " + (getChildrenSize() + getOptionalSize() + 1) + ")");
         for (int i = 0; i < getChildrenSize(); i++) {
             AppView appView = view.getChildren().get(i);
             System.out.println(currentIndex + " - " + appView.getTitle());
